@@ -6,7 +6,7 @@ import { gql, useQuery } from "@apollo/client";
 import CardCharacterSkeleton from "./components/CardCharacterSkeleton";
 
 interface Character {
-  id: number;
+  id: string;
   name: string;
   status: string;
   species: string;

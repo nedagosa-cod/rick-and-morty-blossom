@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator";
 
 interface Character {
   character: {
-    id: number;
+    id: string;
     name: string;
     status: string;
     species: string;
@@ -18,8 +18,9 @@ interface Character {
 }
 
 function Character() {
-  const { toggleFavorite, isFavorite } = useGlobal();
   const { id } = useParams();
+  const { toggleFavorite, isFavorite } = useGlobal();
+
   const GET_CHARACTERS = gql`
       query {
         character(id: ${id}) {
@@ -38,7 +39,7 @@ function Character() {
 
   return (
     <div className="container flex flex-col p-20 mx-auto w-full h-dvh bg-contain bg-center bg-no-repeat overflow-y-hidden ">
-      <header className="w-full flex items-center justify-center h-40 gap-4">
+      <header className="w-full flex items-center h-40 gap-4">
         <div className="w-11/12 space-y-4">
           <div className="relative w-fit">
             <figure className="w-20 h-20 rounded-full overflow-hidden">
@@ -48,6 +49,7 @@ function Character() {
                 className="w-full h-full object-cover"
               />
             </figure>
+
             <button
               className="p-2 rounded-full cursor-pointer absolute -bottom-1 -right-1 bg-white z-10"
               onClick={(e) => {
@@ -57,9 +59,9 @@ function Character() {
             >
               <Heart
                 className={cn(
-                  "w-4 h-4 text-stone-300",
-                  isFavorite(Number(id)) &&
-                    "text-primary fill-primary p-1 ring-white bg-white rounded-full"
+                  "w-6 h-6 text-stone-300",
+                  isFavorite(id || "") &&
+                    "text-primary fill-primary ring-6 ring-white bg-white rounded-full"
                 )}
                 strokeWidth={2.5}
               />
@@ -102,7 +104,7 @@ function Character() {
             Rick and Morty Character
           </p>
         </div>
-        <figure className="absolute bottom-0 right-0 w-1/3 bg-red-500 rounded-full overflow-hidden scale-x-[-1] opacity-30 inset-shadow-sm inset-shadow-indigo-500 ring-8 ring-primary/20">
+        <figure className="absolute bottom-0 right-0 w-80 bg-red-500 rounded-full overflow-hidden scale-x-[-1] opacity-30 inset-shadow-sm inset-shadow-indigo-500 ring-8 ring-primary/20">
           <img
             src={data?.character.image}
             alt={data?.character.name}

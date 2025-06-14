@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import CardCharacter from "./CardCharacter";
 import { useGlobal } from "@/context/GlobalPrivider";
 
 interface Character {
-  id: number;
+  id: string;
   name: string;
   status: string;
   species: string;
@@ -14,7 +14,7 @@ interface Character {
 
 function ListCharacters({ characters }: { characters: Character[] }) {
   const { favorites } = useGlobal();
-
+  const [activeCard, setActiveCard] = useState<string | null>(null);
   const nonFavoriteCharacters = characters.filter(
     (char) => !favorites.some((fav) => fav.id === char.id)
   );
@@ -27,7 +27,12 @@ function ListCharacters({ characters }: { characters: Character[] }) {
             STARRED CHARACTERS ({favorites.length})
           </h2>
           {favorites.map((character) => (
-            <CardCharacter key={character.id} character={character} />
+            <CardCharacter
+              key={character.id}
+              character={character}
+              activeCard={activeCard}
+              setActiveCard={setActiveCard}
+            />
           ))}
           <Separator />
         </>
@@ -42,7 +47,11 @@ function ListCharacters({ characters }: { characters: Character[] }) {
       >
         {nonFavoriteCharacters.map((character) => (
           <div key={character.id}>
-            <CardCharacter character={character} />
+            <CardCharacter
+              character={character}
+              activeCard={activeCard}
+              setActiveCard={setActiveCard}
+            />
             <Separator />
           </div>
         ))}

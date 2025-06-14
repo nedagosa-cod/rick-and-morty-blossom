@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 
 interface Character {
-  id: number;
+  id: string;
   name: string;
   status: string;
   species: string;
@@ -12,7 +12,7 @@ interface Character {
 interface GlobalContextType {
   favorites: Character[];
   toggleFavorite: (character: Character) => void;
-  isFavorite: (id: number) => boolean;
+  isFavorite: (id: string) => boolean;
 }
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
@@ -27,14 +27,15 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const [favorites, setFavorites] = useState<Character[]>([]);
 
   const toggleFavorite = (character: Character) => {
-    setFavorites((prev) =>
-      prev.some((fav) => fav.id === character.id)
-        ? prev.filter((fav) => fav.id !== character.id)
-        : [...prev, character]
+    setFavorites(
+      (prev) =>
+        prev.some((fav) => fav.id === character.id) // Verifica si el personaje ya está en favoritos
+          ? prev.filter((fav) => fav.id !== character.id) // Si ya está en favoritos, lo elimina
+          : [...prev, character] // Si no está en favoritos, lo agrega
     );
   };
 
-  const isFavorite = (id: number) => favorites.some((fav) => fav.id === id);
+  const isFavorite = (id: string) => favorites.some((fav) => fav.id === id);
 
   return (
     <GlobalContext.Provider

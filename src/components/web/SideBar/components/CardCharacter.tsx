@@ -5,7 +5,7 @@ import { useGlobal } from "@/context/GlobalPrivider";
 import { cn } from "@/lib/utils";
 
 interface Character {
-  id: number;
+  id: string;
   name: string;
   status: string;
   species: string;
@@ -13,12 +13,30 @@ interface Character {
   image: string;
 }
 
-function CardCharacter({ character }: { character: Character }) {
+interface CardCharacterProps {
+  character: Character;
+  activeCard: string | null;
+  setActiveCard: (id: string) => void;
+}
+
+function CardCharacter({
+  character,
+  activeCard,
+  setActiveCard,
+}: CardCharacterProps) {
   const { toggleFavorite, isFavorite } = useGlobal();
   return (
     <NavLink
       to={`/character/${character.id}`}
-      className="flex items-center gap-4  p-5 rounded-md cursor-default hover:bg-secondary/10 transition-all duration-300"
+      className={cn(
+        "flex items-center gap-4  p-5 rounded-md cursor-default transition-all duration-300",
+        activeCard === character.id
+          ? "bg-secondary/20"
+          : "hover:bg-secondary/10"
+      )}
+      onClick={() => {
+        setActiveCard(character.id);
+      }}
     >
       <figure className="w-10 h-10 rounded-full overflow-hidden ">
         <img src={character.image} alt="character" />
@@ -33,7 +51,6 @@ function CardCharacter({ character }: { character: Character }) {
         onClick={(e) => {
           e.preventDefault();
           toggleFavorite(character);
-          console.log(character);
         }}
       >
         <Heart
