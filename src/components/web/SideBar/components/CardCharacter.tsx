@@ -2,6 +2,7 @@ import React from "react";
 import { Heart } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useGlobal } from "@/context/GlobalPrivider";
+import { cn } from "@/lib/utils";
 
 interface Character {
   id: number;
@@ -17,7 +18,7 @@ function CardCharacter({ character }: { character: Character }) {
   return (
     <NavLink
       to={`/character/${character.id}`}
-      className="flex items-center gap-4  p-5 rounded-md cursor-pointer hover:bg-secondary/10 transition-all duration-300"
+      className="flex items-center gap-4  p-5 rounded-md cursor-default hover:bg-secondary/10 transition-all duration-300"
     >
       <figure className="w-10 h-10 rounded-full overflow-hidden ">
         <img src={character.image} alt="character" />
@@ -32,12 +33,15 @@ function CardCharacter({ character }: { character: Character }) {
         onClick={(e) => {
           e.preventDefault();
           toggleFavorite(character);
+          console.log(character);
         }}
       >
         <Heart
-          className={`w-6 h-6 text-stone-300 ${
-            isFavorite(character.id) ? "text-red-500" : ""
-          }`}
+          className={cn(
+            "w-6 h-6 text-stone-300",
+            isFavorite(character.id) &&
+              "text-primary fill-primary ring-6 ring-white bg-white rounded-full"
+          )}
           strokeWidth={2.5}
         />
       </button>

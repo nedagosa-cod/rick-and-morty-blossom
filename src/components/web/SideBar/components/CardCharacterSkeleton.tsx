@@ -4,6 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 function CardCharacterSkeleton() {
   return (
     <div className="flex flex-col gap-4 h-dvh p-4 w-full">
+      <h2 className="text-md text-stone-600 my-4">CHARACTERS (0)</h2>
       <div className="flex items-center space-x-4 ">
         <Skeleton className="h-12 w-12 rounded-full bg-primary/20" />
         <div className="space-y-2">

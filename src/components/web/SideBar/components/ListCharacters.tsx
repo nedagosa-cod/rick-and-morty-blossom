@@ -23,7 +23,9 @@ function ListCharacters({ characters }: { characters: Character[] }) {
     <div className="flex flex-col flex-1 overflow-y-auto h-80">
       {favorites.length > 0 && (
         <>
-          <h2 className="text-md text-stone-600 my-4">Starred characters</h2>
+          <h2 className="text-md text-stone-600 my-4">
+            STARRED CHARACTERS ({favorites.length})
+          </h2>
           {favorites.map((character) => (
             <CardCharacter key={character.id} character={character} />
           ))}
@@ -31,7 +33,9 @@ function ListCharacters({ characters }: { characters: Character[] }) {
         </>
       )}
 
-      <h2 className="text-md text-stone-600 my-4">Characters</h2>
+      <h2 className="text-md text-stone-600 my-4">
+        CHARACTERS ({nonFavoriteCharacters.length})
+      </h2>
       <div
         className="flex flex-col flex-1 overflow-y-auto"
         style={{ scrollbarWidth: "none" }}

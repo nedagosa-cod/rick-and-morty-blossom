@@ -1,6 +1,5 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Skeleton } from "@/components/ui/skeleton";
 import TopSideBar from "./components/TopSideBar";
 import ListCharacters from "./components/ListCharacters";
 import { gql, useQuery } from "@apollo/client";
