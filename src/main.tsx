@@ -1,21 +1,17 @@
-import { StrictMode } from "react";
+import React from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-
-const client = new ApolloClient({
-  uri: "https://rickandmortyapi.com/graphql",
-  cache: new InMemoryCache(),
-});
+import { ApolloProvider } from "@apollo/client";
+import { apolloClient } from "./apolloClient.tsx";
+import App from "./App.tsx";
+import "./App.css";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+  <React.StrictMode>
     <BrowserRouter>
-      <ApolloProvider client={client}>
+      <ApolloProvider client={apolloClient}>
         <App />
       </ApolloProvider>
     </BrowserRouter>
-  </StrictMode>
+  </React.StrictMode>
 );

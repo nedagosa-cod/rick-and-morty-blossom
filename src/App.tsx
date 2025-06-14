@@ -7,7 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import { GlobalProvider } from "./context/GlobalPrivider";
 import Character from "./components/web/Character/Character";
 
-function App() {
+export default function App() {
   return (
     <GlobalProvider>
       <SideBar className="w-1/3 max-w-96" />
@@ -18,5 +18,3 @@ function App() {
     </GlobalProvider>
   );
 }
-
-export default App;

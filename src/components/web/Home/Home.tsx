@@ -1,17 +1,13 @@
 import React from "react";
-import imgBackground from "/homeBg.webp";
 
-function Home() {
+export default function Home() {
   return (
-    <div
-      className="w-full h-dvh bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${imgBackground})` }}
-    >
-      <div className="w-full h-full bg-white/80 flex items-center justify-center">
-        <h2 className="text-8xl font-bold">Select one character</h2>
+    <div className="w-full h-dvh bg-cover bg-[url('/homeBg.webp')] bg-center bg-no-repeat">
+      <div className="w-full h-full bg-white/90 flex items-center justify-center">
+        <h2 className="text-8xl font-black text-secondary w-1/2 text-center text-shadow-lg">
+          Select one character
+        </h2>
       </div>
     </div>
   );
 }
-
-export default Home;

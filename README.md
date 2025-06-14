@@ -1,16 +1,16 @@
 ## Create Rick And Morty Applicatipon with the next features.
 
 - [x] React 18
-- [ ] GraphQl
+- [x] GraphQl
 - [x] react-router-dom
 - [x] Tailwind
-- [ ] Array manipulation
+- [x] Array manipulation
 - [ ] State Handling
-- [ ] Path Handling
+- [x] Path Handling
 - [ ] Unit testing
 - [ ] Search characters
 - [ ] Sort A-Z / Z-A
-- [ ]
+- [ ] Create not-Found page
 
 # React + TypeScript + Vite
 

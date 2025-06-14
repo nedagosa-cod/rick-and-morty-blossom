@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Search, SlidersVertical } from "lucide-react";
 import PopOver from "./PopOver";
 
 function TopSideBar() {
   const [open, setOpen] = useState(false);
+  const debouncedRef = useRef<NodeJS.Timeout | null>(null);
+
+  const onQueryChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (debouncedRef.current) {
+      clearTimeout(debouncedRef.current);
+    }
+    debouncedRef.current = setTimeout(() => {
+      console.log(e.target.value);
+    }, 500);
+  };
 
   return (
     <>
@@ -17,6 +27,7 @@ function TopSideBar() {
           type="text"
           placeholder="Search or filter results"
           className="bg-transparent outline-none flex-1"
+          onChange={onQueryChanged}
         />
         <button onClick={() => setOpen(!open)}>
           <SlidersVertical
