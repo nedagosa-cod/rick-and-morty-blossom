@@ -2,8 +2,8 @@
 
 - [x] React 18
 - [ ] GraphQl
-- [ ] react-router-dom
-- [ ] Tailwind
+- [x] react-router-dom
+- [x] Tailwind
 - [ ] Array manipulation
 - [ ] State Handling
 - [ ] Path Handling
