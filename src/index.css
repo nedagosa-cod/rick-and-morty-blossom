@@ -1,0 +1,7 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+#root {
+  display: flex;
+  min-height: 100dvh;
+}
