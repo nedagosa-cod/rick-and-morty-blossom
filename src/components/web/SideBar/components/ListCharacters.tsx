@@ -1,21 +1,48 @@
 import React from "react";
 import { Separator } from "@/components/ui/separator";
 import CardCharacter from "./CardCharacter";
+import { useGlobal } from "@/context/GlobalPrivider";
 
-function ListCharacters() {
+interface Character {
+  id: number;
+  name: string;
+  status: string;
+  species: string;
+  gender: string;
+  image: string;
+}
+
+function ListCharacters({ characters }: { characters: Character[] }) {
+  const { favorites } = useGlobal();
+
+  const nonFavoriteCharacters = characters.filter(
+    (char) => !favorites.some((fav) => fav.id === char.id)
+  );
+
   return (
-    <div>
-      <h2 className="text-md text-stone-600 my-4">Starred characters</h2>
-
-      <CardCharacter />
+    <div className="flex flex-col flex-1 overflow-y-auto h-80">
+      {favorites.length > 0 && (
+        <>
+          <h2 className="text-md text-stone-600 my-4">Starred characters</h2>
+          {favorites.map((character) => (
+            <CardCharacter key={character.id} character={character} />
+          ))}
+          <Separator />
+        </>
+      )}
 
       <h2 className="text-md text-stone-600 my-4">Characters</h2>
-      <Separator />
-      <CardCharacter />
-      <Separator />
-      <CardCharacter />
-      <Separator />
-      <CardCharacter />
+      <div
+        className="flex flex-col flex-1 overflow-y-auto"
+        style={{ scrollbarWidth: "none" }}
+      >
+        {nonFavoriteCharacters.map((character) => (
+          <div key={character.id}>
+            <CardCharacter character={character} />
+            <Separator />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
