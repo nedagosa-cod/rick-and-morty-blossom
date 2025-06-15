@@ -21,9 +21,13 @@ function ListCharacters({
   setFilter,
 }: {
   characters: Character[];
-  filter: { character: string; specie: string };
+  filter: { character: string; specie: string; sort: string };
   filteredFavorites: Character[];
-  setFilter: (filter: { character: string; specie: string }) => void;
+  setFilter: (filter: {
+    character: string;
+    specie: string;
+    sort: string;
+  }) => void;
 }) {
   const { favorites } = useGlobal();
   const [activeCard, setActiveCard] = useState<string | null>(null);
@@ -33,6 +37,17 @@ function ListCharacters({
   const countDifferentFromAll = Object.values(filter).filter(
     (value) => value !== "all"
   ).length;
+
+  const sortedByFilter = (characters: Character[]) => {
+    if (filter.sort === "asc") {
+      return characters.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (filter.sort === "desc") {
+      return characters.sort((a, b) => b.name.localeCompare(a.name));
+    } else {
+      return characters;
+    }
+  };
+
   return (
     <div className="flex flex-col flex-1 h-80 ">
       {/* if the filter is all, show the favorites */}
@@ -45,7 +60,7 @@ function ListCharacters({
             className="flex flex-col max-h-54 md:max-h-84 overflow-y-auto"
             style={{ scrollbarWidth: "none" }}
           >
-            {filteredFavorites.map((character) => {
+            {sortedByFilter(filteredFavorites).map((character) => {
               return (
                 <>
                   <Separator className="md:hidden block" />
@@ -65,14 +80,18 @@ function ListCharacters({
           {/* responsive advanced search */}
           <div className="flex md:hidden justify-between items-center">
             <button
-              onClick={() => setFilter({ character: "all", specie: "all" })}
+              onClick={() =>
+                setFilter({ character: "all", specie: "all", sort: "all" })
+              }
             >
               <ArrowLeft className="w-8 h-8 text-secondary" />
             </button>
             <span>Advanced Search</span>
             <button
               className="text-secondary"
-              onClick={() => setFilter({ character: "all", specie: "all" })}
+              onClick={() =>
+                setFilter({ character: "all", specie: "all", sort: "all" })
+              }
             >
               Done
             </button>
@@ -110,7 +129,7 @@ function ListCharacters({
               )}
               style={{ scrollbarWidth: "none" }}
             >
-              {filteredFavorites.map((character) => {
+              {sortedByFilter(filteredFavorites).map((character) => {
                 return (
                   <>
                     <Separator className="md:hidden block" />
@@ -132,13 +151,13 @@ function ListCharacters({
       {filter.character === "other" || filter.character === "all" ? (
         <>
           <h2 className="text-sm md: text-md text-slate-600 my-4">
-            CHARACTERS ({nonFavoriteCharacters.length})
+            CHARACTERS ({sortedByFilter(nonFavoriteCharacters).length})
           </h2>
           <div
             className="flex flex-col flex-1 overflow-y-auto"
             style={{ scrollbarWidth: "none" }}
           >
-            {nonFavoriteCharacters.map((character) => (
+            {sortedByFilter(nonFavoriteCharacters).map((character) => (
               <div key={character.id}>
                 <CardCharacter
                   character={character}

@@ -7,9 +7,10 @@ function PopOver({ open, setOpen, filter, setFilter }: PopOverProps) {
   const popoverRef = useRef<HTMLDivElement>(null);
   const [character, setCharacter] = useState<string>(filter.character);
   const [specie, setSpecie] = useState<string>(filter.specie);
+  const [sort, setSort] = useState<string>(filter.sort);
 
   const handleFilter = () => {
-    setFilter({ character, specie });
+    setFilter({ character, specie, sort });
     setOpen(false);
   };
 
@@ -155,7 +156,61 @@ function PopOver({ open, setOpen, filter, setFilter }: PopOverProps) {
             </label>
           </div>
         </div>
+        <div>
+          <span className="text-sm text-stone-400">Sort</span>
+          <div className="grid grid-cols-3 gap-2 mt-2">
+            <label
+              className={cn(
+                "flex items-center gap-2  rounded-md p-2 border-stone-300 border-2 text-sm text-center hover:bg-stone-100 font-bold transition-all duration-300",
+                sort === "all" &&
+                  "bg-secondary/20 text-secondary border-none hover:bg-secondary/20"
+              )}
+            >
+              <input
+                type="radio"
+                className="hidden"
+                name="sort"
+                checked={sort === "all"}
+                onChange={() => setSort("all")}
+              />
+              <span className="m-auto">Default</span>
+            </label>
+            <label
+              className={cn(
+                "flex items-center gap-2  rounded-md p-2 border-stone-300 border-2 text-sm text-center hover:bg-stone-100 font-bold transition-all duration-300",
+                sort === "asc" &&
+                  "bg-secondary/20 text-secondary border-none hover:bg-secondary/20"
+              )}
+            >
+              <input
+                type="radio"
+                className="hidden"
+                name="sort"
+                checked={sort === "asc"}
+                onChange={() => setSort("asc")}
+              />
+              <span className="m-auto">A to Z</span>
+            </label>
+            <label
+              className={cn(
+                "flex items-center gap-2  rounded-md p-2 border-stone-300 border-2 text-sm text-center hover:bg-stone-100 font-bold transition-all duration-300",
+                sort === "desc" &&
+                  "bg-secondary/20 text-secondary border-none hover:bg-secondary/20"
+              )}
+            >
+              <input
+                type="radio"
+                className="hidden"
+                name="sort"
+                checked={sort === "desc"}
+                onChange={() => setSort("desc")}
+              />
+              <span className="m-auto">Z to A</span>
+            </label>
+          </div>
+        </div>
       </div>
+
       <button
         className={cn(
           "w-full bg-secondary/90 hover:bg-secondary md:bg-secondary/40 text-white py-2 px-4 rounded-md",

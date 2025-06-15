@@ -4,8 +4,13 @@ export interface PopOverProps {
   filter: {
     character: string;
     specie: string;
+    sort: string;
   };
-  setFilter: (value: { character: string; specie: string }) => void;
+  setFilter: (value: {
+    character: string;
+    specie: string;
+    sort: string;
+  }) => void;
 }
 export interface Character {
   id: string;

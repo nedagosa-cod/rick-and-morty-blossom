@@ -13,8 +13,13 @@ function TopSideBar({
   filter: {
     character: string;
     specie: string;
+    sort: string;
   };
-  setFilter: (value: { character: string; specie: string }) => void;
+  setFilter: (value: {
+    character: string;
+    specie: string;
+    sort: string;
+  }) => void;
 }) {
   const [open, setOpen] = useState<boolean>(false);
 

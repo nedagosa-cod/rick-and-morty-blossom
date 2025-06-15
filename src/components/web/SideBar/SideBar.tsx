@@ -14,6 +14,7 @@ function SideBar() {
   const [filter, setFilter] = useState({
     character: "all",
     specie: "all",
+    sort: "all",
   });
   const debouncedSearch = useDebounce(search, 500);
   const { viewPageCharacter } = useGlobal();
@@ -33,6 +34,7 @@ function SideBar() {
         <p className="text-sm">Intenta nuevamente en unos minutos</p>
       </div>
     );
+
   const filteredFavorites = favorites.filter((char) => {
     const matchesSpecie =
       filter.specie === "all" || char.species === filter.specie;
