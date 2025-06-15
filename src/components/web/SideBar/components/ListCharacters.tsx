@@ -34,11 +34,11 @@ function ListCharacters({
       {/* if the filter is all, show the favorites */}
       {countDifferentFromAll === 0 ? (
         <>
-          <h2 className="text-md text-stone-600 my-4">
+          <h2 className="text-sm md: text-md text-slate-600 my-4">
             STARRED CHARACTERS ({filteredFavorites.length})
           </h2>
           <div
-            className="flex flex-col max-h-84 overflow-y-auto"
+            className="flex flex-col max-h-54 md:max-h-84 overflow-y-auto"
             style={{ scrollbarWidth: "none" }}
           >
             {filteredFavorites.map((character) => {
@@ -71,7 +71,10 @@ function ListCharacters({
           </div>
           {/* just show the favorites if the filter is starred */}
           {filter.character !== "other" && (
-            <>
+            <div
+              className="flex flex-col h-full overflow-y-auto"
+              style={{ scrollbarWidth: "none" }}
+            >
               {filteredFavorites.map((character) => {
                 return (
                   <CardCharacter
@@ -82,14 +85,14 @@ function ListCharacters({
                   />
                 );
               })}
-            </>
+            </div>
           )}
         </>
       )}
       {/* if the filter is other or all, show the non favorite characters */}
       {filter.character === "other" || filter.character === "all" ? (
         <>
-          <h2 className="text-md text-stone-600 my-4">
+          <h2 className="text-sm md: text-md text-slate-600 my-4">
             CHARACTERS ({nonFavoriteCharacters.length})
           </h2>
           <div
@@ -109,7 +112,9 @@ function ListCharacters({
           </div>
         </>
       ) : (
-        <h2 className="text-md text-stone-600 my-4">CHARACTERS (0)</h2>
+        <h2 className="text-sm md: text-md text-slate-600 my-4">
+          CHARACTERS (0)
+        </h2>
       )}
     </div>
   );

@@ -5,13 +5,16 @@ import { ApolloProvider } from "@apollo/client";
 import { apolloClient } from "./apolloClient.tsx";
 import App from "./App.tsx";
 import "./App.css";
+import { GlobalProvider } from "./context/GlobalPrivider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ApolloProvider client={apolloClient}>
-        <App />
-      </ApolloProvider>
-    </BrowserRouter>
+    <GlobalProvider>
+      <BrowserRouter>
+        <ApolloProvider client={apolloClient}>
+          <App />
+        </ApolloProvider>
+      </BrowserRouter>
+    </GlobalProvider>
   </React.StrictMode>
 );

@@ -20,12 +20,12 @@ function TopSideBar({
 
   return (
     <>
-      <div className="flex h-20 items-end text-2xl font-bold">
+      <div className="flex h-20 items-end text-2xl font-bold text-slate-800">
         <h1>Rick and Morty list</h1>
       </div>
       {/* Search */}
-      <div className="flex items-center gap-2 bg-stone-200 h-14 py-2 px-6 rounded-md w-full relative">
-        <Search className="w-6 h-6 text-stone-400" />
+      <div className="flex items-center gap-2 bg-slate-100 h-10 md:h-14 md:py-2 px-6 rounded-md w-full relative">
+        <Search className="w-6 h-6 text-slate-400" />
         <input
           type="text"
           placeholder="Search or filter results"

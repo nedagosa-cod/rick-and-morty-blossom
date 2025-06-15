@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { cn } from "@/lib/utils";
 import TopSideBar from "./components/TopSideBar";
 import ListCharacters from "./components/ListCharacters";
 import { useQuery } from "@apollo/client";
@@ -8,7 +7,7 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { GET_CHARACTERS } from "@/queries/queries";
 import { useGlobal } from "@/context/GlobalPrivider";
 
-function SideBar({ className }: { className?: string }) {
+function SideBar() {
   const { favorites } = useGlobal();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState({
@@ -24,7 +23,15 @@ function SideBar({ className }: { className?: string }) {
     },
   });
 
-  if (error) return <div>Error: {error.message}</div>;
+  if (error)
+    return (
+      <div className="flex flex-col items-center justify-center h-dvh text-stone-600">
+        <h2 className="text-2xl font-bold">
+          Error: No se han podido cargar los personajes
+        </h2>
+        <p className="text-sm">Intenta nuevamente en unos minutos</p>
+      </div>
+    );
   const filteredFavorites = favorites.filter((char) => {
     const matchesSpecie =
       filter.specie === "all" || char.species === filter.specie;
@@ -36,10 +43,9 @@ function SideBar({ className }: { className?: string }) {
 
   return (
     <nav
-      className={cn(
-        "flex flex-col gap-4 bg-stone-100 h-dvh overflow-y-hidden p-4",
-        className
-      )}
+      className={
+        "flex flex-col gap-4 bg-white md:shadow-[inset_0px_0px_30px_4px_rgba(0,0,0,0.1)] h-dvh overflow-y-hidden p-4 w-full md:w-1/3 absolute top-0 left-0 z-40"
+      }
     >
       <TopSideBar
         search={search}

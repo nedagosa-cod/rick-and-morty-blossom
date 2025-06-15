@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import type { PopOverProps } from "@/types/props";
 import { cn } from "@/lib/utils";
+import { ArrowLeft } from "lucide-react";
 
 function PopOver({ open, setOpen, filter, setFilter }: PopOverProps) {
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -35,9 +36,18 @@ function PopOver({ open, setOpen, filter, setFilter }: PopOverProps) {
 
   return (
     <div
-      className="flex flex-col gap-6 absolute top-full right-0 bg-white rounded-md p-6 w-full border border-stone-200 shadow-md mt-2 "
+      className="flex flex-col gap-6 absolute -top-28 md:top-full h-dvh right-0 bg-white md:rounded-md p-6 w-full md:w-full md:h-auto md:border md:border-stone-200 md:shadow-md md:mt-2 z-50"
       ref={popoverRef}
     >
+      <div className="flex justify-between items-center md:hidden relative">
+        <button
+          onClick={() => setOpen(false)}
+          className="w-6 h-6 absolute left-0"
+        >
+          <ArrowLeft className="w-6 h-6 text-secondary" />
+        </button>
+        <h2 className="text-md font-bold text-center m-auto">Filters</h2>
+      </div>
       <div>
         <span className="text-sm text-stone-400">Character</span>
         <div className="grid grid-cols-3 gap-2 mt-2">

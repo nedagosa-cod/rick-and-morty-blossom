@@ -15,7 +15,7 @@ function CardCharacter({
     <NavLink
       to={`/character/${character.id}`}
       className={cn(
-        "flex items-center gap-4  p-5 rounded-md cursor-default transition-all duration-300",
+        "flex items-center gap-4 py-4 md:py-5 px-5 rounded-md cursor-default transition-all duration-300",
         activeCard === character.id
           ? "bg-secondary/20"
           : "hover:bg-secondary/10"
@@ -28,8 +28,8 @@ function CardCharacter({
         <img src={character.image} alt="character" />
       </figure>
       <div className="flex flex-col flex-1">
-        <h3 className="text-md font-bold">{character.name}</h3>
-        <span className="text-sm text-stone-400">{character.species}</span>
+        <h3 className="text-sm md:text-md font-bold">{character.name}</h3>
+        <span className=" text-sm text-slate-400">{character.species}</span>
       </div>
       {/* button to set favorite */}
       <button
@@ -41,7 +41,7 @@ function CardCharacter({
       >
         <Heart
           className={cn(
-            "w-6 h-6 text-stone-300",
+            "w-6 h-6 text-slate-300",
             isFavorite(character.id) &&
               "text-primary fill-primary ring-6 ring-white bg-white rounded-full"
           )}
