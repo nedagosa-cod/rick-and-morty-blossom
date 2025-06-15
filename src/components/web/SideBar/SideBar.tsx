@@ -1,25 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import TopSideBar from "./components/TopSideBar";
 import ListCharacters from "./components/ListCharacters";
 import { gql, useQuery } from "@apollo/client";
 import CardCharacterSkeleton from "./components/CardCharacterSkeleton";
-
-interface Character {
-  id: string;
-  name: string;
-  status: string;
-  species: string;
-  gender: string;
-  image: string;
-}
+import { useDebounce } from "@/hooks/useDebounce";
 
 export const GET_CHARACTERS = gql`
-  query {
-    characters(page: 1) {
-      info {
-        count
-      }
+  query GetCharacters($name: String) {
+    characters(filter: { name: $name }) {
       results {
         id
         name
@@ -32,17 +21,13 @@ export const GET_CHARACTERS = gql`
   }
 `;
 
-type CharactersData = {
-  characters: {
-    info: {
-      count: number;
-    };
-    results: Character[];
-  };
-};
-
 function SideBar({ className }: { className?: string }) {
-  const { loading, error, data } = useQuery<CharactersData>(GET_CHARACTERS);
+  const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
+
+  const { loading, error, data } = useQuery(GET_CHARACTERS, {
+    variables: { name: debouncedSearch || undefined },
+  });
   if (error) return <div>Error: {error.message}</div>;
   return (
     <nav
@@ -51,7 +36,7 @@ function SideBar({ className }: { className?: string }) {
         className
       )}
     >
-      <TopSideBar />
+      <TopSideBar search={search} setSearch={setSearch} />
       {loading && <CardCharacterSkeleton />}
       <ListCharacters characters={data?.characters.results || []} />
     </nav>
