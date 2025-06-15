@@ -3,6 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import CardCharacter from "./CardCharacter";
 import { useGlobal } from "@/context/GlobalPrivider";
 import { cn } from "@/lib/utils";
+import { ArrowLeft } from "lucide-react";
 
 interface Character {
   id: string;
@@ -17,10 +18,12 @@ function ListCharacters({
   characters,
   filter,
   filteredFavorites,
+  setFilter,
 }: {
   characters: Character[];
   filter: { character: string; specie: string };
   filteredFavorites: Character[];
+  setFilter: (filter: { character: string; specie: string }) => void;
 }) {
   const { favorites } = useGlobal();
   const [activeCard, setActiveCard] = useState<string | null>(null);
@@ -44,20 +47,39 @@ function ListCharacters({
           >
             {filteredFavorites.map((character) => {
               return (
-                <CardCharacter
-                  key={character.id}
-                  character={character}
-                  activeCard={activeCard}
-                  setActiveCard={setActiveCard}
-                />
+                <>
+                  <Separator className="md:hidden block" />
+                  <CardCharacter
+                    key={character.id}
+                    character={character}
+                    activeCard={activeCard}
+                    setActiveCard={setActiveCard}
+                  />
+                </>
               );
             })}
           </div>
         </>
       ) : (
         <>
-          {/* show the results and the filter */}
-          <div className="flex justify-between items-center px-6 mb-4">
+          {/* responsive advanced search */}
+          <div className="flex md:hidden justify-between items-center">
+            <button
+              onClick={() => setFilter({ character: "all", specie: "all" })}
+            >
+              <ArrowLeft className="w-8 h-8 text-secondary" />
+            </button>
+            <span>Advanced Search</span>
+            <button
+              className="text-secondary"
+              onClick={() => setFilter({ character: "all", specie: "all" })}
+            >
+              Done
+            </button>
+          </div>
+          {/* filters applied */}
+          <Separator className="md:hidden block my-4" />
+          <div className="flex justify-between items-center md:px-6 mb-4">
             <span className="text-sm text-blue-600 font-bold">
               {filter.character === "other"
                 ? nonFavoriteCharacters.length
@@ -66,10 +88,16 @@ function ListCharacters({
                 : nonFavoriteCharacters.length + filteredFavorites.length}{" "}
               Results
             </span>
-            <div className="text-sm text-green-900 font-bold bg-primary/20 rounded-full p-1 w-20 text-center">
+            <div className="text-sm text-green-600 font-bold bg-primary/20 rounded-full p-1 w-20 text-center">
               {countDifferentFromAll} Filter
             </div>
           </div>
+          {/* responsive title starred */}
+          <Separator className="md:hidden block" />
+          <h2 className="text-sm md:hidden text-md text-slate-600 my-4">
+            STARRED CHARACTERS ({filteredFavorites.length})
+          </h2>
+
           {/* just show the favorites if the filter is starred */}
           {(filter.character === "starred" || filter.character === "all") && (
             <div
@@ -84,12 +112,15 @@ function ListCharacters({
             >
               {filteredFavorites.map((character) => {
                 return (
-                  <CardCharacter
-                    key={character.id}
-                    character={character}
-                    activeCard={activeCard}
-                    setActiveCard={setActiveCard}
-                  />
+                  <>
+                    <Separator className="md:hidden block" />
+                    <CardCharacter
+                      key={character.id}
+                      character={character}
+                      activeCard={activeCard}
+                      setActiveCard={setActiveCard}
+                    />
+                  </>
                 );
               })}
             </div>

@@ -37,6 +37,7 @@ function CardCharacter({
         className="p-2 rounded-full cursor-pointer"
         onClick={(e) => {
           e.preventDefault();
+          e.stopPropagation();
           toggleFavorite(character);
         }}
       >

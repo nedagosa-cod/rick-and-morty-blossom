@@ -5,6 +5,7 @@ import { ArrowLeft, Dna, Heart, User } from "lucide-react";
 import { useGlobal } from "@/context/GlobalPrivider";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
+import CharacterSkeleton from "./components/CharacterSkeleton";
 
 interface Character {
   character: {
@@ -40,7 +41,7 @@ function Character() {
     `;
   const { loading, error, data } = useQuery<Character>(GET_CHARACTERS);
   if (error) return <div>Error: {error.message}</div>;
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <CharacterSkeleton />;
 
   return (
     <div
@@ -123,7 +124,7 @@ function Character() {
             Rick and Morty Character
           </p>
         </div>
-        <figure className="absolute bottom-0 right-0 w-80 bg-red-500 rounded-full overflow-hidden scale-x-[-1] opacity-30 inset-shadow-sm inset-shadow-indigo-500 ring-8 ring-primary/20">
+        <figure className="absolute bottom-0 right-0 w-40 md:w-80 bg-red-500 rounded-full overflow-hidden scale-x-[-1] opacity-30 inset-shadow-sm inset-shadow-indigo-500 ring-8 ring-primary/20">
           <img
             src={data?.character.image}
             alt={data?.character.name}

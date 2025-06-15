@@ -62,6 +62,7 @@ function SideBar() {
           characters={data?.characters.results || []}
           filter={filter}
           filteredFavorites={filteredFavorites}
+          setFilter={setFilter}
         />
       )}
     </nav>
