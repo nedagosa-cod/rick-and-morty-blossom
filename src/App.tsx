@@ -10,7 +10,7 @@ import Character from "./components/web/Character/Character";
 export default function App() {
   return (
     <GlobalProvider>
-      <SideBar className="w-1/3 max-w-96" />
+      <SideBar className="w-1/3" />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/character/:id" element={<Character />} />

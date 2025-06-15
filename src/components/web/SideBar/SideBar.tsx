@@ -23,8 +23,8 @@ function SideBar({ className }: { className?: string }) {
       species: filter.specie !== "all" ? filter.specie : undefined,
     },
   });
-  if (error) return <div>Error: {error.message}</div>;
 
+  if (error) return <div>Error: {error.message}</div>;
   const filteredFavorites = favorites.filter((char) => {
     const matchesSpecie =
       filter.specie === "all" || char.species === filter.specie;
@@ -50,7 +50,7 @@ function SideBar({ className }: { className?: string }) {
       {loading && <CardCharacterSkeleton />}
       <ListCharacters
         characters={data?.characters.results || []}
-        filter={filter.character}
+        filter={filter}
         filteredFavorites={filteredFavorites}
       />
     </nav>

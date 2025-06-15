@@ -38,7 +38,7 @@ function Character() {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="container flex flex-col p-20 mx-auto w-full h-dvh bg-contain bg-center bg-no-repeat overflow-y-hidden ">
+    <div className="container flex flex-col p-20 mx-auto w-3/4 h-dvh bg-contain bg-center bg-no-repeat overflow-y-hidden ">
       <header className="w-full flex items-center h-40 gap-4">
         <div className="w-11/12 space-y-4">
           <div className="relative w-fit">
