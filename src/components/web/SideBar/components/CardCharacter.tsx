@@ -3,21 +3,7 @@ import { Heart } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useGlobal } from "@/context/GlobalPrivider";
 import { cn } from "@/lib/utils";
-
-interface Character {
-  id: string;
-  name: string;
-  status: string;
-  species: string;
-  gender: string;
-  image: string;
-}
-
-interface CardCharacterProps {
-  character: Character;
-  activeCard: string | null;
-  setActiveCard: (id: string) => void;
-}
+import type { CardCharacterProps } from "@/types/props";
 
 function CardCharacter({
   character,

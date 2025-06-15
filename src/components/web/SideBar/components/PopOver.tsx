@@ -1,20 +1,20 @@
+import React, { useRef, useState } from "react";
+import type { PopOverProps } from "@/types/props";
 import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState } from "react";
 
-function PopOver({
-  open,
-  setOpen,
-}: {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-}) {
-  const [character, setCharacter] = useState<"all" | "starred" | "other">(
-    "all"
-  );
-  const [specie, setSpecie] = useState<"all" | "Human" | "Alien">("all");
+function PopOver({ open, setOpen, filter, setFilter }: PopOverProps) {
   const popoverRef = useRef<HTMLDivElement>(null);
+  const [gender, setGender] = useState<string>(filter.gender);
+  const [specie, setSpecie] = useState<string>(filter.specie);
 
-  useEffect(() => {
+  const handleFilter = () => {
+    if (gender !== "all" || specie !== "all") {
+      setFilter({ gender, specie });
+      setOpen(false);
+    }
+  };
+
+  React.useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
         popoverRef.current &&
@@ -34,6 +34,7 @@ function PopOver({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [open, popoverRef]);
+
   return (
     <div
       className="flex flex-col gap-6 absolute top-full right-0 bg-white rounded-md p-6 w-full border border-stone-200 shadow-md mt-2 "
@@ -45,55 +46,55 @@ function PopOver({
           <label
             className={cn(
               "flex items-center gap-2  rounded-md p-2 border-stone-300 border-2 text-sm text-center hover:bg-stone-100 font-bold transition-all duration-300",
-              character === "all" &&
+              gender === "all" &&
                 "bg-secondary/20 text-secondary border-none hover:bg-secondary/20"
             )}
           >
             <input
               type="radio"
               className="hidden"
-              name="character"
-              checked={character === "all"}
-              onChange={() => setCharacter("all")}
+              name="gender"
+              checked={gender === "all"}
+              onChange={() => setGender("all")}
             />
             <span className="m-auto">All</span>
           </label>
           <label
             className={cn(
               "flex items-center gap-2 rounded-md p-2 border-stone-300 border-2 text-sm text-center hover:bg-stone-100 font-bold transition-all duration-300",
-              character === "starred" &&
+              gender === "starred" &&
                 "bg-secondary/20 text-secondary border-none hover:bg-secondary/20"
             )}
           >
             <input
               type="radio"
               className="hidden"
-              name="character"
-              checked={character === "starred"}
-              onChange={() => setCharacter("starred")}
+              name="gender"
+              checked={gender === "starred"}
+              onChange={() => setGender("starred")}
             />
             <span className="m-auto">Starred</span>
           </label>
           <label
             className={cn(
               "flex items-center gap-2  rounded-md p-2 border-stone-300 border-2 text-sm text-center hover:bg-stone-100 font-bold transition-all duration-300",
-              character === "other" &&
+              gender === "other" &&
                 "bg-secondary/20 text-secondary border-none hover:bg-secondary/20"
             )}
           >
             <input
               type="radio"
               className="hidden"
-              name="character"
-              checked={character === "other"}
-              onChange={() => setCharacter("other")}
+              name="gender"
+              checked={gender === "other"}
+              onChange={() => setGender("other")}
             />
             <span className="m-auto">Other</span>
           </label>
         </div>
       </div>
       <div>
-        <span className="text-sm text-stone-400">Character</span>
+        <span className="text-sm text-stone-400">Specie</span>
         <div className="grid grid-cols-3 gap-2 mt-2">
           <label
             className={cn(
@@ -148,18 +149,12 @@ function PopOver({
       <button
         className={cn(
           "w-full bg-stone-200 text-stone-400 py-2 px-4 rounded-md",
-          character !== "all" &&
+          gender !== "all" &&
             "bg-secondary/60 text-white hover:bg-secondary cursor-pointer",
           specie !== "all" &&
             "bg-secondary/60 text-white hover:bg-secondary cursor-pointer"
         )}
-        onClick={() => {
-          if (character !== "all" || specie !== "all") {
-            setCharacter("all");
-            setSpecie("all");
-            setOpen(false);
-          }
-        }}
+        onClick={handleFilter}
       >
         Filter
       </button>

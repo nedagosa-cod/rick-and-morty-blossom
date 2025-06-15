@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import { Search, SlidersVertical } from "lucide-react";
 import PopOver from "./PopOver";
+import type { TopSideBarProps } from "@/types/props";
 
-function TopSideBar({
-  search,
-  setSearch,
-}: {
-  search: string;
-  setSearch: (value: string) => void;
-}) {
-  const [open, setOpen] = useState(false);
+function TopSideBar({ search, setSearch, filter, setFilter }: TopSideBarProps) {
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <>
@@ -33,7 +28,14 @@ function TopSideBar({
           />
         </button>
         {/* popover */}
-        {open && <PopOver open={open} setOpen={setOpen} />}
+        {open && (
+          <PopOver
+            open={open}
+            setOpen={setOpen}
+            filter={filter}
+            setFilter={setFilter}
+          />
+        )}
       </div>
     </>
   );
