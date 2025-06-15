@@ -2,29 +2,17 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import TopSideBar from "./components/TopSideBar";
 import ListCharacters from "./components/ListCharacters";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import CardCharacterSkeleton from "./components/CardCharacterSkeleton";
 import { useDebounce } from "@/hooks/useDebounce";
-
-export const GET_CHARACTERS = gql`
-  query GetCharacters($name: String, $species: String) {
-    characters(filter: { name: $name, species: $species }) {
-      results {
-        id
-        name
-        status
-        species
-        gender
-        image
-      }
-    }
-  }
-`;
+import { GET_CHARACTERS } from "@/queries/queries";
+import { useGlobal } from "@/context/GlobalPrivider";
 
 function SideBar({ className }: { className?: string }) {
+  const { favorites } = useGlobal();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState({
-    gender: "all",
+    character: "all",
     specie: "all",
   });
   const debouncedSearch = useDebounce(search, 500);
@@ -33,10 +21,19 @@ function SideBar({ className }: { className?: string }) {
     variables: {
       name: debouncedSearch || undefined,
       species: filter.specie !== "all" ? filter.specie : undefined,
-      gender: filter.gender !== "all" ? filter.gender : undefined,
     },
   });
   if (error) return <div>Error: {error.message}</div>;
+
+  const filteredFavorites = favorites.filter((char) => {
+    const matchesSpecie =
+      filter.specie === "all" || char.species === filter.specie;
+    const matchesSearch =
+      !debouncedSearch ||
+      char.name.toLowerCase().includes(debouncedSearch.toLowerCase());
+    return matchesSpecie && matchesSearch;
+  });
+
   return (
     <nav
       className={cn(
@@ -51,7 +48,11 @@ function SideBar({ className }: { className?: string }) {
         setFilter={setFilter}
       />
       {loading && <CardCharacterSkeleton />}
-      <ListCharacters characters={data?.characters.results || []} />
+      <ListCharacters
+        characters={data?.characters.results || []}
+        filter={filter.character}
+        filteredFavorites={filteredFavorites}
+      />
     </nav>
   );
 }

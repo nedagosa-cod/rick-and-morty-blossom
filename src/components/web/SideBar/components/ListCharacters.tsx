@@ -12,7 +12,15 @@ interface Character {
   image: string;
 }
 
-function ListCharacters({ characters }: { characters: Character[] }) {
+function ListCharacters({
+  characters,
+  filter,
+  filteredFavorites,
+}: {
+  characters: Character[];
+  filter: string;
+  filteredFavorites: Character[];
+}) {
   const { favorites } = useGlobal();
   const [activeCard, setActiveCard] = useState<string | null>(null);
   const nonFavoriteCharacters = characters.filter(
@@ -21,41 +29,50 @@ function ListCharacters({ characters }: { characters: Character[] }) {
 
   return (
     <div className="flex flex-col flex-1 overflow-y-auto h-80">
-      {favorites.length > 0 && (
+      {filter === "starred" || filter === "all" ? (
         <>
           <h2 className="text-md text-stone-600 my-4">
-            STARRED CHARACTERS ({favorites.length})
+            STARRED CHARACTERS ({filteredFavorites.length})
           </h2>
-          {favorites.map((character) => (
-            <CardCharacter
-              key={character.id}
-              character={character}
-              activeCard={activeCard}
-              setActiveCard={setActiveCard}
-            />
-          ))}
-          <Separator />
+          {filteredFavorites.map((character) => {
+            return (
+              <CardCharacter
+                key={character.id}
+                character={character}
+                activeCard={activeCard}
+                setActiveCard={setActiveCard}
+              />
+            );
+          })}
         </>
+      ) : (
+        <h2 className="text-md text-stone-600 my-4">STARRED CHARACTERS (0)</h2>
       )}
 
-      <h2 className="text-md text-stone-600 my-4">
-        CHARACTERS ({nonFavoriteCharacters.length})
-      </h2>
-      <div
-        className="flex flex-col flex-1 overflow-y-auto"
-        style={{ scrollbarWidth: "none" }}
-      >
-        {nonFavoriteCharacters.map((character) => (
-          <div key={character.id}>
-            <CardCharacter
-              character={character}
-              activeCard={activeCard}
-              setActiveCard={setActiveCard}
-            />
-            <Separator />
+      {filter === "other" || filter === "all" ? (
+        <>
+          <h2 className="text-md text-stone-600 my-4">
+            CHARACTERS ({nonFavoriteCharacters.length})
+          </h2>
+          <div
+            className="flex flex-col flex-1 overflow-y-auto"
+            style={{ scrollbarWidth: "none" }}
+          >
+            {nonFavoriteCharacters.map((character) => (
+              <div key={character.id}>
+                <CardCharacter
+                  character={character}
+                  activeCard={activeCard}
+                  setActiveCard={setActiveCard}
+                />
+                <Separator />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      ) : (
+        <h2 className="text-md text-stone-600 my-4">CHARACTERS (0)</h2>
+      )}
     </div>
   );
 }

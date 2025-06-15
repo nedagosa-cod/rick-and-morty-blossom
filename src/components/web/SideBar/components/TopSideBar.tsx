@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 import { Search, SlidersVertical } from "lucide-react";
 import PopOver from "./PopOver";
-import type { TopSideBarProps } from "@/types/props";
 
-function TopSideBar({ search, setSearch, filter, setFilter }: TopSideBarProps) {
+function TopSideBar({
+  search,
+  setSearch,
+  filter,
+  setFilter,
+}: {
+  search: string;
+  setSearch: (value: string) => void;
+  filter: {
+    character: string;
+    specie: string;
+  };
+  setFilter: (value: { character: string; specie: string }) => void;
+}) {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
