@@ -5,10 +5,10 @@
 - [x] react-router-dom
 - [x] Tailwind
 - [x] Array manipulation
-- [ ] State Handling
+- [x] State Handling
 - [x] Path Handling
 - [ ] Unit testing
-- [ ] Search characters
+- [x] Search characters
 - [ ] Sort A-Z / Z-A
 - [ ] Create not-Found page
 

@@ -146,7 +146,10 @@ function PopOver({ open, setOpen, filter, setFilter }: PopOverProps) {
       </div>
       <button
         className={cn(
-          "w-full bg-secondary/40 text-stone-400 py-2 px-4 rounded-md"
+          "w-full bg-secondary/40 text-stone-400 py-2 px-4 rounded-md",
+          character === "all" &&
+            specie === "all" &&
+            "bg-stone-200 text-stone-400"
         )}
         onClick={handleFilter}
       >

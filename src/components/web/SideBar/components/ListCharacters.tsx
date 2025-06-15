@@ -30,28 +30,33 @@ function ListCharacters({
     (value) => value !== "all"
   ).length;
   return (
-    <div className="flex flex-col flex-1 overflow-y-auto h-80">
+    <div className="flex flex-col flex-1 h-80 ">
       {/* if the filter is all, show the favorites */}
       {countDifferentFromAll === 0 ? (
         <>
           <h2 className="text-md text-stone-600 my-4">
             STARRED CHARACTERS ({filteredFavorites.length})
           </h2>
-
-          {filteredFavorites.map((character) => {
-            return (
-              <CardCharacter
-                key={character.id}
-                character={character}
-                activeCard={activeCard}
-                setActiveCard={setActiveCard}
-              />
-            );
-          })}
+          <div
+            className="flex flex-col max-h-84 overflow-y-auto"
+            style={{ scrollbarWidth: "none" }}
+          >
+            {filteredFavorites.map((character) => {
+              return (
+                <CardCharacter
+                  key={character.id}
+                  character={character}
+                  activeCard={activeCard}
+                  setActiveCard={setActiveCard}
+                />
+              );
+            })}
+          </div>
         </>
       ) : (
         <>
-          <div className="flex justify-between items-center px-6">
+          {/* show the results and the filter */}
+          <div className="flex justify-between items-center px-6 mb-4">
             <span className="text-sm text-blue-600 font-bold">
               {filter.character === "other"
                 ? nonFavoriteCharacters.length

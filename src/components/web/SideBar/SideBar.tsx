@@ -47,12 +47,15 @@ function SideBar({ className }: { className?: string }) {
         filter={filter}
         setFilter={setFilter}
       />
-      {loading && <CardCharacterSkeleton />}
-      <ListCharacters
-        characters={data?.characters.results || []}
-        filter={filter}
-        filteredFavorites={filteredFavorites}
-      />
+      {loading ? (
+        <CardCharacterSkeleton />
+      ) : (
+        <ListCharacters
+          characters={data?.characters.results || []}
+          filter={filter}
+          filteredFavorites={filteredFavorites}
+        />
+      )}
     </nav>
   );
 }
