@@ -102,7 +102,7 @@ function PopOver({ open, setOpen, filter, setFilter }: PopOverProps) {
         </div>
       </div>
       <div>
-        <span className="text-sm text-stone-400">Character</span>
+        <span className="text-sm text-stone-400">Specie</span>
         <div className="grid grid-cols-3 gap-2 mt-2">
           <label
             className={cn(

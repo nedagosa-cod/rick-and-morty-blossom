@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import CardCharacter from "./CardCharacter";
 import { useGlobal } from "@/context/GlobalPrivider";
+import { cn } from "@/lib/utils";
 
 interface Character {
   id: string;
@@ -70,9 +71,15 @@ function ListCharacters({
             </div>
           </div>
           {/* just show the favorites if the filter is starred */}
-          {filter.character !== "other" && (
+          {(filter.character === "starred" || filter.character === "all") && (
             <div
-              className="flex flex-col h-full overflow-y-auto"
+              className={cn(
+                `flex flex-col ${
+                  filter.character === "starred"
+                    ? "h-full"
+                    : "max-h-54 md:max-h-84"
+                } overflow-y-auto`
+              )}
               style={{ scrollbarWidth: "none" }}
             >
               {filteredFavorites.map((character) => {
@@ -89,6 +96,7 @@ function ListCharacters({
           )}
         </>
       )}
+
       {/* if the filter is other or all, show the non favorite characters */}
       {filter.character === "other" || filter.character === "all" ? (
         <>

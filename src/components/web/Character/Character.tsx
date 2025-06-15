@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
-import { Dna, Heart, User } from "lucide-react";
+import { ArrowLeft, Dna, Heart, User } from "lucide-react";
 import { useGlobal } from "@/context/GlobalPrivider";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
@@ -19,7 +19,12 @@ interface Character {
 
 function Character() {
   const { id } = useParams();
-  const { toggleFavorite, isFavorite } = useGlobal();
+  const {
+    toggleFavorite,
+    isFavorite,
+    viewPageCharacter,
+    setViewPageCharacter,
+  } = useGlobal();
 
   const GET_CHARACTERS = gql`
       query {
@@ -38,7 +43,21 @@ function Character() {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="container flex flex-col p-20 mx-auto w-3/4 h-dvh bg-contain bg-center bg-no-repeat overflow-y-hidden ">
+    <div
+      className={cn(
+        "container flex-col p-8 md:p-20 mx-auto w-full md:w-3/4 h-dvh bg-contain bg-center bg-no-repeat overflow-y-hidden ",
+        viewPageCharacter ? "flex" : "hidden"
+      )}
+    >
+      <div className="w-full md:hidden my-4">
+        <button
+          onClick={() => {
+            setViewPageCharacter(false);
+          }}
+        >
+          <ArrowLeft className="w-8 h-8 text-secondary" />
+        </button>
+      </div>
       <header className="w-full flex items-center h-40 gap-4">
         <div className="w-11/12 space-y-4">
           <div className="relative w-fit">

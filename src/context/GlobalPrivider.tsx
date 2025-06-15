@@ -13,6 +13,8 @@ interface GlobalContextType {
   favorites: Character[];
   toggleFavorite: (character: Character) => void;
   isFavorite: (id: string) => boolean;
+  viewPageCharacter: boolean;
+  setViewPageCharacter: (value: boolean) => void;
 }
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
@@ -25,6 +27,7 @@ export const useGlobal = () => {
 
 export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const [favorites, setFavorites] = useState<Character[]>([]);
+  const [viewPageCharacter, setViewPageCharacter] = useState<boolean>(false);
 
   const toggleFavorite = (character: Character) => {
     setFavorites(
@@ -43,6 +46,8 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
         favorites,
         toggleFavorite,
         isFavorite,
+        viewPageCharacter,
+        setViewPageCharacter,
       }}
     >
       {children}

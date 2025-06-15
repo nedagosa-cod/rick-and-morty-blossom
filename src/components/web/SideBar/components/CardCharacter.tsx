@@ -10,7 +10,7 @@ function CardCharacter({
   activeCard,
   setActiveCard,
 }: CardCharacterProps) {
-  const { toggleFavorite, isFavorite } = useGlobal();
+  const { toggleFavorite, isFavorite, setViewPageCharacter } = useGlobal();
   return (
     <NavLink
       to={`/character/${character.id}`}
@@ -22,6 +22,7 @@ function CardCharacter({
       )}
       onClick={() => {
         setActiveCard(character.id);
+        setViewPageCharacter(true);
       }}
     >
       <figure className="w-10 h-10 rounded-full overflow-hidden ">
