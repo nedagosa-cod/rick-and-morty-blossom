@@ -5,12 +5,18 @@ import { useGlobal } from "@/context/GlobalPrivider";
 import { cn } from "@/lib/utils";
 import type { CardCharacterProps } from "@/types/props";
 
-function CardCharacter({
+export default function CardCharacter({
   character,
   activeCard,
   setActiveCard,
 }: CardCharacterProps) {
   const { toggleFavorite, isFavorite, setViewPageCharacter } = useGlobal();
+
+  const setFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleFavorite(character);
+  };
   return (
     <NavLink
       to={`/character/${character.id}`}
@@ -33,14 +39,7 @@ function CardCharacter({
         <span className=" text-sm text-slate-400">{character.species}</span>
       </div>
       {/* button to set favorite */}
-      <button
-        className="p-2 rounded-full cursor-pointer"
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          toggleFavorite(character);
-        }}
-      >
+      <button className="p-2 rounded-full cursor-pointer" onClick={setFavorite}>
         <Heart
           className={cn(
             "w-6 h-6 text-slate-300",
@@ -53,5 +52,3 @@ function CardCharacter({
     </NavLink>
   );
 }
-
-export default CardCharacter;

@@ -1,10 +1,10 @@
 import React from "react";
+import "./App.css";
+import App from "./App.tsx";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import { apolloClient } from "./apolloClient.tsx";
-import App from "./App.tsx";
-import "./App.css";
 import { GlobalProvider } from "./context/GlobalPrivider.tsx";
 
 createRoot(document.getElementById("root")!).render(

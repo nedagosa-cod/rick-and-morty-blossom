@@ -4,41 +4,28 @@ import CardCharacter from "./CardCharacter";
 import { useGlobal } from "@/context/GlobalPrivider";
 import { cn } from "@/lib/utils";
 import { ArrowLeft } from "lucide-react";
-
-interface Character {
-  id: string;
-  name: string;
-  status: string;
-  species: string;
-  gender: string;
-  image: string;
-}
+import type { Character, ListCharactersProps } from "@/types/props";
 
 function ListCharacters({
   characters,
   filter,
   filteredFavorites,
   setFilter,
-}: {
-  characters: Character[];
-  filter: { character: string; specie: string; sort: string };
-  filteredFavorites: Character[];
-  setFilter: (filter: {
-    character: string;
-    specie: string;
-    sort: string;
-  }) => void;
-}) {
+}: ListCharactersProps) {
   const { favorites } = useGlobal();
   const [activeCard, setActiveCard] = useState<string | null>(null);
+
+  // extract the characters that are not favorites
   const nonFavoriteCharacters = characters.filter(
     (char) => !favorites.some((fav) => fav.id === char.id)
   );
+  // count the filters applied
   const countDifferentFromAll = Object.values(filter).filter(
     (value) => value !== "all"
   ).length;
 
-  const sortedByFilter = (characters: Character[]) => {
+  // sort the characters to asc or desc by name
+  const sortCards = (characters: Character[]) => {
     if (filter.sort === "asc") {
       return characters.sort((a, b) => a.name.localeCompare(b.name));
     } else if (filter.sort === "desc") {
@@ -47,10 +34,10 @@ function ListCharacters({
       return characters;
     }
   };
-  console.log(characters);
+
   return (
     <div className="flex flex-col flex-1 h-80 ">
-      {/* if the filter is all, show the favorites */}
+      {/* if there are no filters applied, show the normal cards */}
       {countDifferentFromAll === 0 ? (
         <>
           <h2 className="text-sm md: text-md text-slate-600 my-4">
@@ -60,17 +47,16 @@ function ListCharacters({
             className="flex flex-col max-h-54 md:max-h-84 overflow-y-auto"
             style={{ scrollbarWidth: "none" }}
           >
-            {sortedByFilter(filteredFavorites).map((character) => {
+            {sortCards(filteredFavorites).map((character) => {
               return (
-                <>
+                <div key={character.id}>
                   <Separator className="md:hidden block" />
                   <CardCharacter
-                    key={character.id}
                     character={character}
                     activeCard={activeCard}
                     setActiveCard={setActiveCard}
                   />
-                </>
+                </div>
               );
             })}
           </div>
@@ -117,7 +103,7 @@ function ListCharacters({
             STARRED CHARACTERS ({filteredFavorites.length})
           </h2>
 
-          {/* just show the favorites if the filter is starred */}
+          {/* just show the favorites section if has the conditions */}
           {(filter.character === "starred" || filter.character === "all") && (
             <div
               className={cn(
@@ -129,7 +115,7 @@ function ListCharacters({
               )}
               style={{ scrollbarWidth: "none" }}
             >
-              {sortedByFilter(filteredFavorites).map((character) => {
+              {sortCards(filteredFavorites).map((character) => {
                 return (
                   <>
                     <Separator className="md:hidden block" />
@@ -151,13 +137,13 @@ function ListCharacters({
       {filter.character === "other" || filter.character === "all" ? (
         <>
           <h2 className="text-sm md: text-md text-slate-600 my-4">
-            CHARACTERS ({sortedByFilter(nonFavoriteCharacters).length})
+            CHARACTERS ({sortCards(nonFavoriteCharacters).length})
           </h2>
           <div
             className="flex flex-col flex-1 overflow-y-auto"
             style={{ scrollbarWidth: "none" }}
           >
-            {sortedByFilter(nonFavoriteCharacters).map((character) => (
+            {sortCards(nonFavoriteCharacters).map((character) => (
               <div key={character.id}>
                 <CardCharacter
                   character={character}

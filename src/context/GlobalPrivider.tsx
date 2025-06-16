@@ -1,21 +1,6 @@
+import type { GlobalContextType } from "@/types/context";
+import type { Character } from "@/types/props";
 import React, { createContext, useContext, useState } from "react";
-
-interface Character {
-  id: string;
-  name: string;
-  status: string;
-  species: string;
-  gender: string;
-  image: string;
-}
-
-interface GlobalContextType {
-  favorites: Character[];
-  toggleFavorite: (character: Character) => void;
-  isFavorite: (id: string) => boolean;
-  viewPageCharacter: boolean;
-  setViewPageCharacter: (value: boolean) => void;
-}
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 
