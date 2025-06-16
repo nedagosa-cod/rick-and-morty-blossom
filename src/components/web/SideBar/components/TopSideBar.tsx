@@ -8,22 +8,22 @@ function TopSideBar({ search, setSearch, filter, setFilter }: TopSideBarProps) {
 
   return (
     <>
-      <div className="flex h-20 items-end text-2xl font-bold text-slate-800">
+      <div className="flex items-end h-20 text-2xl font-bold text-slate-800">
         <h1>Rick and Morty list</h1>
       </div>
       {/* Search */}
-      <div className="flex items-center gap-2 bg-slate-100 h-10 md:h-14 md:py-2 px-6 rounded-md w-full relative">
+      <div className="relative flex items-center w-full h-10 gap-2 px-6 rounded-md bg-slate-100 md:h-14 md:py-2">
         <Search className="w-6 h-6 text-slate-400" />
         <input
           type="text"
           placeholder="Search or filter results"
-          className="bg-transparent outline-none flex-1"
+          className="flex-1 bg-transparent outline-none"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button onClick={() => setOpen(!open)}>
+        <button onClick={() => setOpen((prev) => !prev)}>
           <SlidersVertical
-            className="w-6 h-6 hover:ring-8 hover:ring-secondary/10 rounded-sm hover:bg-secondary/10 text-secondary transition-all duration-300 font-bold"
+            className="w-6 h-6 font-bold transition-all duration-300 rounded-sm hover:ring-8 hover:ring-secondary/10 hover:bg-secondary/10 text-secondary"
             strokeWidth={2.5}
           />
         </button>

@@ -40,17 +40,17 @@ function ListCharacters({
       {/* if there are no filters applied, show the normal cards */}
       {countDifferentFromAll === 0 ? (
         <>
-          <h2 className="text-sm md: text-md text-slate-600 my-4">
+          <h2 className="my-4 text-sm md: text-md text-slate-600">
             STARRED CHARACTERS ({filteredFavorites.length})
           </h2>
           <div
-            className="flex flex-col max-h-54 md:max-h-84 overflow-y-auto"
+            className="flex flex-col overflow-y-auto max-h-54 md:max-h-84"
             style={{ scrollbarWidth: "none" }}
           >
             {sortCards(filteredFavorites).map((character) => {
               return (
                 <div key={character.id}>
-                  <Separator className="md:hidden block" />
+                  <Separator className="block md:hidden" />
                   <CardCharacter
                     character={character}
                     activeCard={activeCard}
@@ -64,7 +64,7 @@ function ListCharacters({
       ) : (
         <>
           {/* responsive advanced search */}
-          <div className="flex md:hidden justify-between items-center">
+          <div className="flex items-center justify-between md:hidden">
             <button
               onClick={() =>
                 setFilter({ character: "all", specie: "all", sort: "all" })
@@ -83,9 +83,9 @@ function ListCharacters({
             </button>
           </div>
           {/* filters applied */}
-          <Separator className="md:hidden block my-4" />
-          <div className="flex justify-between items-center md:px-6 mb-4">
-            <span className="text-sm text-blue-600 font-bold">
+          <Separator className="block my-4 md:hidden" />
+          <div className="flex items-center justify-between mb-4 md:px-6">
+            <span className="text-sm font-bold text-blue-600">
               {filter.character === "other"
                 ? nonFavoriteCharacters.length
                 : filter.character === "starred"
@@ -93,13 +93,13 @@ function ListCharacters({
                 : nonFavoriteCharacters.length + filteredFavorites.length}{" "}
               Results
             </span>
-            <div className="text-sm text-green-600 font-bold bg-primary/20 rounded-full p-1 w-20 text-center">
+            <div className="w-20 p-1 text-sm font-bold text-center text-green-600 rounded-full bg-primary/20">
               {countDifferentFromAll} Filter
             </div>
           </div>
           {/* responsive title starred */}
-          <Separator className="md:hidden block" />
-          <h2 className="text-sm md:hidden text-md text-slate-600 my-4">
+          <Separator className="block md:hidden" />
+          <h2 className="my-4 text-sm md:hidden text-md text-slate-600">
             STARRED CHARACTERS ({filteredFavorites.length})
           </h2>
 
@@ -118,7 +118,7 @@ function ListCharacters({
               {sortCards(filteredFavorites).map((character) => {
                 return (
                   <>
-                    <Separator className="md:hidden block" />
+                    <Separator className="block md:hidden" />
                     <CardCharacter
                       key={character.id}
                       character={character}
@@ -136,7 +136,7 @@ function ListCharacters({
       {/* if the filter is other or all, show the non favorite characters */}
       {filter.character === "other" || filter.character === "all" ? (
         <>
-          <h2 className="text-sm md: text-md text-slate-600 my-4">
+          <h2 className="my-4 text-sm md: text-md text-slate-600">
             CHARACTERS ({sortCards(nonFavoriteCharacters).length})
           </h2>
           <div
@@ -156,7 +156,7 @@ function ListCharacters({
           </div>
         </>
       ) : (
-        <h2 className="text-sm md: text-md text-slate-600 my-4">
+        <h2 className="my-4 text-sm md: text-md text-slate-600">
           CHARACTERS (0)
         </h2>
       )}

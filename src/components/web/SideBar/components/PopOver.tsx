@@ -37,18 +37,18 @@ function PopOver({ open, setOpen, filter, setFilter }: PopOverProps) {
 
   return (
     <div
-      className="flex flex-col gap-6 absolute -top-28 md:top-full h-dvh right-0 bg-white md:rounded-md p-6 w-full md:w-full md:h-auto md:border md:border-stone-200 md:shadow-md md:mt-2 z-50"
+      className="absolute right-0 z-50 flex flex-col w-full gap-6 p-6 bg-white -top-28 md:top-full h-dvh md:rounded-md md:w-full md:h-auto md:border md:border-stone-200 md:shadow-md md:mt-2"
       ref={popoverRef}
     >
-      <div className="flex flex-col gap-4 flex-1">
-        <div className="flex justify-between items-center md:hidden relative">
+      <div className="flex flex-col flex-1 gap-4">
+        <div className="relative flex items-center justify-between md:hidden">
           <button
             onClick={() => setOpen(false)}
-            className="w-6 h-6 absolute left-0"
+            className="absolute left-0 w-6 h-6"
           >
             <ArrowLeft className="w-6 h-6 text-secondary" />
           </button>
-          <h2 className="text-md font-bold text-center m-auto">Filters</h2>
+          <h2 className="m-auto font-bold text-center text-md">Filters</h2>
         </div>
         <div>
           <span className="text-sm text-stone-400">Characters</span>

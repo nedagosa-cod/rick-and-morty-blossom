@@ -12,7 +12,7 @@ export const useGlobal = () => {
 
 export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const [favorites, setFavorites] = useState<Character[]>([]);
-  const [viewPageCharacter, setViewPageCharacter] = useState<boolean>(false);
+  const [viewPageCharacter, setViewPageCharacter] = useState<boolean>(true);
 
   const toggleFavorite = (character: Character) => {
     setFavorites(

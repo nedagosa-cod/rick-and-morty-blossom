@@ -24,19 +24,19 @@ export default function CardCharacter({
         "flex items-center gap-4 py-4 md:py-5 px-5 rounded-md cursor-default transition-all duration-300",
         activeCard === character.id
           ? "bg-secondary/20"
-          : "hover:bg-secondary/10"
+          : "hover:bg-linear-to-bl from-secondary/10 to-secondary/20"
       )}
       onClick={() => {
         setActiveCard(character.id);
         setViewPageCharacter(true);
       }}
     >
-      <figure className="w-10 h-10 rounded-full overflow-hidden ">
+      <figure className="w-10 h-10 overflow-hidden rounded-full ">
         <img src={character.image} alt="character" />
       </figure>
       <div className="flex flex-col flex-1">
-        <h3 className="text-sm md:text-md font-bold">{character.name}</h3>
-        <span className=" text-sm text-slate-400">{character.species}</span>
+        <h3 className="text-sm font-bold md:text-md">{character.name}</h3>
+        <span className="text-sm text-slate-400">{character.species}</span>
       </div>
       {/* button to set favorite */}
       <button className="p-2 rounded-full cursor-pointer" onClick={setFavorite}>

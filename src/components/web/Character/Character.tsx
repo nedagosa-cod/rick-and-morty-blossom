@@ -28,7 +28,7 @@ function Character() {
         viewPageCharacter ? "flex" : "hidden"
       )}
     >
-      <div className="w-full md:hidden my-4">
+      <div className="w-full my-4 md:hidden">
         <button
           onClick={() => {
             setViewPageCharacter(false);
@@ -41,19 +41,19 @@ function Character() {
         <CharacterSkeleton />
       ) : (
         <>
-          <header className="w-full flex items-center h-40 gap-4">
+          <header className="flex items-center w-full h-40 gap-4">
             <div className="w-11/12 space-y-4">
               <div className="relative w-fit">
-                <figure className="w-20 h-20 rounded-full overflow-hidden">
+                <figure className="w-20 h-20 overflow-hidden rounded-full">
                   <img
                     src={data?.character.image}
                     alt={data?.character.name}
-                    className="w-full h-full object-cover"
+                    className="object-cover w-full h-full"
                   />
                 </figure>
 
                 <button
-                  className="p-2 rounded-full cursor-pointer absolute -bottom-1 -right-1 bg-white z-10"
+                  className="absolute z-10 p-2 bg-white rounded-full cursor-pointer -bottom-1 -right-1"
                   onClick={(e) => {
                     e.preventDefault();
                     if (data?.character) toggleFavorite(data.character);
@@ -72,9 +72,9 @@ function Character() {
               <span className="text-xl font-bold">{data?.character.name}</span>
             </div>
           </header>
-          <section className="w-full h-full flex flex-col space-y-4 mt-8 relative">
+          <section className="relative flex flex-col w-full h-full mt-8 space-y-4">
             {/* Información del personaje */}
-            <div className="space-y-1 flex flex-col  flex-1">
+            <div className="flex flex-col flex-1 space-y-1">
               <div className="flex items-center gap-3 p-3 rounded-lg bg-stone-100 backdrop-blur-sm">
                 <Dna className="w-5 h-5 text-green-400" />
                 <div>
@@ -102,7 +102,7 @@ function Character() {
 
             {/* Footer decorativo */}
             <div className="pt-4 border-t border-white/10">
-              <p className="text-center text-xs text-gray-400">
+              <p className="text-xs text-center text-gray-400">
                 Rick and Morty Character
               </p>
             </div>
@@ -110,7 +110,7 @@ function Character() {
               <img
                 src={data?.character.image}
                 alt={data?.character.name}
-                className="w-full h-full object-cover"
+                className="object-cover w-full h-full"
               />
             </figure>
           </section>
