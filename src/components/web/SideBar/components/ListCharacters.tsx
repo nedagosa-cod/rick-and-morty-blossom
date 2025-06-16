@@ -47,7 +47,7 @@ function ListCharacters({
       return characters;
     }
   };
-
+  console.log(characters);
   return (
     <div className="flex flex-col flex-1 h-80 ">
       {/* if the filter is all, show the favorites */}

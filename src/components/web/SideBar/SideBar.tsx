@@ -40,7 +40,9 @@ function SideBar() {
       filter.specie === "all" || char.species === filter.specie;
     const matchesSearch =
       !debouncedSearch ||
-      char.name.toLowerCase().includes(debouncedSearch.toLowerCase());
+      [char.name, char.status, char.species, char.gender].some((field) =>
+        field?.toLowerCase().includes(debouncedSearch.toLowerCase())
+      );
     return matchesSpecie && matchesSearch;
   });
 

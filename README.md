@@ -1,68 +1,52 @@
-## Create Rick And Morty Applicatipon with the next features.
+# Blossom Rick And Morty Test
 
-- [x] React 18
-- [x] GraphQl
-- [x] react-router-dom
-- [x] Tailwind
-- [x] Array manipulation
-- [x] State Handling
-- [x] Path Handling
-- [ ] Unit testing
-- [x] Search characters
-- [ ] Sort A-Z / Z-A
-- [ ] Create not-Found page
+## Description
 
-# React + TypeScript + Vite
+This project evaluate the candidate's skills in frontend application development using modern JavaScript technologies. It focuses on the use of React 18, GraphQL, React Router DOM, TailwindCSS, array manipulation, state management, path handling, interfaces, and unit testing.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Main Technologies
 
-Currently, two official plugins are available:
+- React 18
+- TypeScript
+- Vite
+- GraphQL
+- Apollo Client
+- React Router DOM
+- TailwindCSS
+- Jest (for unit testing)
+- Other dependencies (see `package.json`)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation and Running
 
-## Expanding the ESLint configuration
+1. Clone the repository from GitHub.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the project in development mode:
+   ```bash
+   npm run dev
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Deployment
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+For production, build the project and serve the generated folder on your preferred server:
+
+```bash
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Then, serve the contents of the `dist` folder on your server.
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+## Useful Resources and Links
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    "react-x": reactX,
-    "react-dom": reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs["recommended-typescript"].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
-```
+- Rick and Morty API: [https://rickandmortyapi.com/documentation/](https://rickandmortyapi.com/documentation/)
+- Project Figma: [https://www.figma.com/file/SNp4G8hic6esedoQBH06fb/Playground?type=design&node-id=373-9599&mode=design&t=ySaCtMplFH6SX2EF-0](https://www.figma.com/file/SNp4G8hic6esedoQBH06fb/Playground?type=design&node-id=373-9599&mode=design&t=ySaCtMplFH6SX2EF-0)
+
+## Author
+
+- Nestor David Gomez Sanabria
+
+## License
+
+This project does not have a specific license.
